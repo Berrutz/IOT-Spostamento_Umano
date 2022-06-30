@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         if ((mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)) == null)
-            Log.i(TAG, "Accellerometer not found");
+            Log.i(TAG, "Accellerometer not foundd");
 
         sensorListener = new MoveDetector(sensorManager,textCount,Doing);
 
