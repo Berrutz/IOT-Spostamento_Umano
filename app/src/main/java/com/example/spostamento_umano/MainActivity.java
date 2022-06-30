@@ -8,15 +8,23 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends AppCompatActivity {
 
+    private final String TAG = "MainActivity";
     private SensorManager sensorManager;
     private Sensor mSensor;
-    private Button bttStart =null , bttStop=null;
+    private Button bttStart = null, bttStop = null;
+
+    private TextView textCount = null;
+    private SensorEventListener sensorListener = null;
+    private TextView Doing=null;
 
 
     // NECESSITA' : Foreground Task
@@ -28,50 +36,47 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         bttStart = findViewById(R.id.bttStart);
         bttStop = findViewById(R.id.bttStop);
+        textCount = findViewById(R.id.Move);
+        Doing = findViewById(R.id.Doing);
 
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if ((mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)) == null)
+            Log.i(TAG, "Accellerometer not found");
 
-        if ((mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)) != null){
-            List<Sensor> gravSensors = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER); // lista sensori di tipo
-            for(int i=0; i<gravSensors.size(); i++) {
-                if ((gravSensors.get(i).getVendor().contains("Google LLC")) && (gravSensors.get(i).getVersion() == 3)){
-                    // Use the version 3 gravity sensor.
-                    mSensor = gravSensors.get(i);
-                    String vendor = mSensor.getVendor();
-                }
+        sensorListener = new MoveDetector(sensorManager,textCount,Doing);
+
+        bttStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sensorManager.unregisterListener(sensorListener); // se attaccato a altri sensori posso specificare solo 1
+
             }
-        }
+        });
+
+        bttStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sensorManager.unregisterListener(sensorListener); // se attaccato a altri sensori posso specificare solo 1
 
 
-    }
+            }
+        });
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        // The light sensor returns a single value.
-        // Many sensors return 3 values, one for each axis.
-        float val1 = event.values[0];
-        float val2 = event.values[1];
-        float val3 = event.values[2];
 
-        // Do something with this sensor value.
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-        // Do something here if sensor accuracy changes.
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL); // ogni quanto prendere i dati
+        sensorManager.registerListener(sensorListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL); // ogni quanto prendere i dati
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        sensorManager.unregisterListener(this);
+        sensorManager.unregisterListener(sensorListener);
     }
+
 }

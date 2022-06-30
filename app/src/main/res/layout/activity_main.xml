@@ -1,17 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity"
     >
 
-    <TextView
+    <Button
+        android:id="@+id/bttStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-         />
+        android:text="@string/start"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp">
+    </Button>
 
+    <Button
+        android:id="@+id/bttStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp">
+    </Button>
+
+    <TextView
+        android:id="@+id/Move"
+        android:layout_width="87dp"
+        android:layout_height="215dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/Doing"
+        android:layout_width="124dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp">
+    </TextView>
 
 
 </LinearLayout>
