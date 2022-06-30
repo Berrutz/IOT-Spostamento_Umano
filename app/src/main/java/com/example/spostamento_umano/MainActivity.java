@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         bttStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sensorManager.unregisterListener(sensorListener); // se attaccato a altri sensori posso specificare solo 1
+                sensorManager.registerListener(sensorListener,mSensor,SensorManager.SENSOR_DELAY_NORMAL);
 
             }
         });

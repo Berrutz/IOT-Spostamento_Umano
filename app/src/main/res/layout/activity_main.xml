@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="20dp">
     </Button>
 
@@ -23,25 +23,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stop"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="20dp">
     </Button>
 
     <TextView
         android:id="@+id/Move"
-        android:layout_width="87dp"
-        android:layout_height="215dp"
+        android:layout_width="347dp"
+        android:layout_height="82dp"
         android:layout_marginTop="20dp"
-        android:textSize="30sp">
-    </TextView>
+        android:text="0"
+        android:textSize="30sp"></TextView>
 
     <TextView
         android:id="@+id/Doing"
         android:layout_width="124dp"
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
-        android:textSize="30sp">
-    </TextView>
+        android:text="Sitting"
+        android:textSize="30sp"
+        android:layout_margin="100dp"></TextView>
 
 
 </LinearLayout>
